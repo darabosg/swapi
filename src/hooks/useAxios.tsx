@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useState, useEffect } from 'react';
 
 const swapiAxios = axios.create({
@@ -6,8 +6,8 @@ const swapiAxios = axios.create({
 });
 
 const useGetSwapi = (url: string) => {
-  const [response, setResponse] = useState<any | null>(null);
-  const [error, setError] = useState('');
+  const [response, setResponse] = useState<AxiosResponse>();
+  const [error, setError] = useState<AxiosError>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,8 +15,8 @@ const useGetSwapi = (url: string) => {
 
     swapiAxios
       .get(url)
-      .then((res) => setResponse(res.data))
-      .catch((err) => setError(err.message))
+      .then((res) => setResponse(res))
+      .catch((err) => setError(err))
       .finally(() => setLoading(false));
 
     return () => controller.abort();

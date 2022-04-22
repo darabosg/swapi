@@ -10,7 +10,7 @@ const Species = () => {
   return (
     <div>
       {species &&
-        species.people.map((characterUrl: string) => (
+        species.data.people.map((characterUrl: string) => (
           <div key={characterUrl}>
             <Link to={`/character/${getIdFromUrl(characterUrl)}`}>
               {characterUrl}

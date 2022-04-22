@@ -14,7 +14,7 @@ const Character = () => {
   return (
     <div>
       <p>char</p>
-      <p>{character && character.name}</p>
+      <p>{character && character.data.name}</p>
     </div>
   );
 };
