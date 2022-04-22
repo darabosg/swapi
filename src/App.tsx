@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  HashRouter,
-  BrowserRouter,
-  Route,
-  Navigate,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
 
 import './App.css';
 import Header from './components/Header/Header';
