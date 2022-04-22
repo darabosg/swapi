@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
+import { HashRouter, Route, Navigate, Routes } from 'react-router-dom';
 
 import './App.css';
 import Header from './components/Header/Header';
@@ -10,15 +10,17 @@ import Species from './pages/Species/Species';
 function App() {
   return (
     <>
-      <Header />
-      <BrowserRouter>
+      <HashRouter>
+        <Header />
         <Routes>
+          {/* <Route path="/swapi"> */}
           <Route path="/" element={<Home />} />
           <Route path="species" element={<Species />} />
           <Route path="character" element={<Character />} />
           <Route path="*" element={<Navigate replace to="/" />} />
+          {/* </Route> */}
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
