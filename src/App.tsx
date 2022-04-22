@@ -13,12 +13,10 @@ function App() {
       <HashRouter>
         <Header />
         <Routes>
-          {/* <Route path="/swapi"> */}
           <Route path="/" element={<Home />} />
-          <Route path="species" element={<Species />} />
-          <Route path="character" element={<Character />} />
+          <Route path="species/:id" element={<Species />} />
+          <Route path="character/:id" element={<Character />} />
           <Route path="*" element={<Navigate replace to="/" />} />
-          {/* </Route> */}
         </Routes>
       </HashRouter>
     </>
