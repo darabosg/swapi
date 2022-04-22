@@ -1,18 +1,15 @@
-import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import useGetSwapi from '../../hooks/useAxios';
-import getIdFromUrl from '../../utils/getIdFromUrl';
 
 const Character = () => {
   const { id } = useParams();
   const [character, error, isLoading] = useGetSwapi(`/people/${id}`);
 
-  useEffect(() => {
-    console.log(error);
-  });
-
   return (
     <div>
+      {isLoading && <p>Loading</p>}
+      {error && <p>error</p>}
       <p>char</p>
       <p>{character && character.data.name}</p>
     </div>

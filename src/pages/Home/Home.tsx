@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useGetSwapi from '../../hooks/useAxios';
 import getIdFromUrl from '../../utils/getIdFromUrl';
@@ -24,12 +24,10 @@ type SpeciesTypes = {
 const Home: React.FC = () => {
   const [species, error, isLoading] = useGetSwapi('/species');
 
-  useEffect(() => {
-    console.log(species);
-  }, [species]);
-
   return (
     <div>
+      {isLoading && <p>Loading</p>}
+      {error && <p>error</p>}
       {species &&
         species.data.results.map((species: SpeciesTypes) => (
           <div key={species.url}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useGetSwapi from '../../hooks/useAxios';
 import getIdFromUrl from '../../utils/getIdFromUrl';
@@ -9,6 +9,8 @@ const Species = () => {
 
   return (
     <div>
+      {isLoading && <p>Loading</p>}
+      {error && <p>error</p>}
       {species &&
         species.data.people.map((characterUrl: string) => (
           <div key={characterUrl}>
