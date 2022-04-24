@@ -28,22 +28,9 @@ export type CharacterTypes = {
   homeworld: string;
   films: string[];
   species: string[];
-  vehicles: [
-    'https://swapi.dev/api/vehicles/14/',
-    'https://swapi.dev/api/vehicles/30/'
-  ];
-  starships: [
-    'https://swapi.dev/api/starships/12/',
-    'https://swapi.dev/api/starships/22/'
-  ];
+  vehicles: string[];
+  starships: string[];
   created: string;
   edited: string;
   url: string;
-};
-
-export type SpeciesListResponse = {
-  count: number;
-  next: null | string;
-  previous: null | string;
-  results: SpeciesTypes[];
 };

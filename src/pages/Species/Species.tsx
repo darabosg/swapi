@@ -19,7 +19,7 @@ const Species: React.FC = () => {
         component="h1"
         sx={{ mb: 1 }}
       >
-        {response?.data.name}s:
+        {response?.data.name}
       </Typography>
       <Grid container sx={{ mb: 4, justifyContent: 'center' }}>
         <Grid item>
@@ -27,7 +27,7 @@ const Species: React.FC = () => {
           {error && <p>Something went wrong...</p>}
         </Grid>
         {response && (
-          <Grid container columnSpacing={4} rowSpacing={{ xs: 1, sm: 4 }}>
+          <Grid container columnSpacing={4} rowSpacing={{ xs: 1, sm: 2 }}>
             {response.data.people.map((characterUrl: string) => (
               <Grid item key={characterUrl} xs={12} sm={6}>
                 <CharacterButton charId={getIdFromUrl(characterUrl)} />

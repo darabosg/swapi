@@ -32,17 +32,17 @@ const Header: React.FC = () => {
       sx={{ mb: { xs: 2, sm: 4 } }}
     >
       <Container maxWidth="md">
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" sx={{ p: 1 }}>
           <Grid
             container
             sx={{ justifyContent: { xs: 'center', sm: 'start' } }}
           >
-            <Grid item sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Grid item xs={12} sm="auto">
               <Typography
                 onClick={() => navigate('/')}
                 variant="h4"
                 noWrap
-                component="h1"
+                component="h2"
                 sx={{
                   mr: 4,
                   cursor: 'pointer',
@@ -57,7 +57,7 @@ const Header: React.FC = () => {
                 blurOnSelect={true}
                 clearOnBlur={true}
                 onBlur={() => setSearchInput('')}
-                sx={{ width: { xs: '100%', sm: 300 } }}
+                sx={{ width: { xs: '100%', sm: 350 } }}
                 autoHighlight={true}
                 isOptionEqualToValue={(option, value) =>
                   option.name === value.name
@@ -79,7 +79,7 @@ const Header: React.FC = () => {
                     hiddenLabel
                     {...params}
                     sx={{ pt: 0 }}
-                    placeholder="Start typing to search..."
+                    placeholder="Start typing to search for character..."
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setSearchInput(e.target.value)
                     }

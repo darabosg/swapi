@@ -53,7 +53,7 @@ const Home: React.FC = () => {
         </Grid>
       </Grid>
       {response && (
-        <Grid container columnSpacing={4} rowSpacing={{ xs: 1, sm: 4 }}>
+        <Grid container columnSpacing={4} rowSpacing={{ xs: 1, sm: 2 }}>
           {response.data.results.map((species: SpeciesTypes) => (
             <Grid item key={species.url} xs={12} sm={6}>
               <Paper
