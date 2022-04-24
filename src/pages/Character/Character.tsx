@@ -22,42 +22,47 @@ const Character: React.FC = () => {
             component="h1"
             sx={{ mb: 1 }}
           >
-            {response?.data.name}
+            {response.data.name}
           </Typography>
           <Typography component="p" sx={{ mb: 1 }}>
-            {capitalizeFirstChar(response?.data.gender)}, Born in{' '}
-            {response?.data.birth_year}
+            {capitalizeFirstChar(response.data.gender)}, Born in{' '}
+            {response.data.birth_year}
           </Typography>
           <Typography component="p" sx={{ mb: 1 }}>
-            Height: {response?.data.height}, Mass: {response?.data.mass}
+            Height: {response.data.height}, Mass: {response.data.mass}
           </Typography>
           <Typography component="p" sx={{ mb: 1 }}>
-            Eyes: {response?.data.eye_color}
+            Eyes: {response.data.eye_color}
           </Typography>
           <Typography component="p" sx={{ mb: 1 }}>
-            Hair: {response?.data.hair_color}
+            Hair: {response.data.hair_color}
           </Typography>
           <Typography component="p" sx={{ mb: 1 }}>
-            Skin: {response?.data.skin_color}
+            Skin: {response.data.skin_color}
           </Typography>
-          <Typography component="p" sx={{ mb: 0 }}>
-            Species:
-          </Typography>
-          <Typography component="ul" sx={{ mb: 1 }}>
-            {response?.data.species.map((speciesUrl: string) => (
-              <PropertyListItem
-                key={speciesUrl}
-                id={getIdFromUrl(speciesUrl)}
-                type="species"
-                property="name"
-              />
-            ))}
-          </Typography>
+          {response.data.species.length !== 0 && (
+            <>
+              <Typography component="p" sx={{ mb: 0 }}>
+                Species:
+              </Typography>
+              <Typography component="ul" sx={{ mb: 1 }}>
+                {response.data.species.map((speciesUrl: string) => (
+                  <PropertyListItem
+                    key={speciesUrl}
+                    id={getIdFromUrl(speciesUrl)}
+                    type="species"
+                    property="name"
+                  />
+                ))}
+              </Typography>
+            </>
+          )}
+
           <Typography component="p" sx={{ mb: 0 }}>
             Movies:
           </Typography>
           <Typography component="ul" sx={{ mb: 1 }}>
-            {response?.data.films.map((filmUrl: string) => (
+            {response.data.films.map((filmUrl: string) => (
               <PropertyListItem
                 key={filmUrl}
                 id={getIdFromUrl(filmUrl)}

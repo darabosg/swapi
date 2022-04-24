@@ -48,7 +48,7 @@ const Header: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                SWAPI
+                SW-api
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
