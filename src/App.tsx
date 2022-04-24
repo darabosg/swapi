@@ -13,10 +13,10 @@ function App() {
       <HashRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/:page" element={<Home />} />
           <Route path="species/:id" element={<Species />} />
           <Route path="character/:id" element={<Character />} />
-          <Route path="*" element={<Navigate replace to="/" />} />
+          <Route path="*" element={<Navigate replace to="/1" />} />
         </Routes>
       </HashRouter>
     </>

@@ -1,25 +1,42 @@
+import { Container, Grid, CircularProgress, Typography } from '@mui/material';
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import useGetSwapi from '../../hooks/useAxios';
+import { useParams } from 'react-router-dom';
+import useSwapiGet from '../../hooks/useSwapiGet';
 import getIdFromUrl from '../../utils/getIdFromUrl';
+import CharacterButton from './components/CharacterButton';
 
-const Species = () => {
+const Species: React.FC = () => {
   const { id } = useParams();
-  const [species, error, isLoading] = useGetSwapi(`/species/${id}`);
+  const { response, error, isLoading } = useSwapiGet(`/species/${id}`);
 
   return (
-    <div>
-      {isLoading && <p>Loading</p>}
-      {error && <p>error</p>}
-      {species &&
-        species.data.people.map((characterUrl: string) => (
-          <div key={characterUrl}>
-            <Link to={`/character/${getIdFromUrl(characterUrl)}`}>
-              {characterUrl}
-            </Link>
-          </div>
-        ))}
-    </div>
+    <Container maxWidth="md">
+      <Typography
+        fontSize={{
+          sm: 42,
+          xs: 30,
+        }}
+        component="h1"
+        sx={{ mb: 1 }}
+      >
+        {response?.data.name}s:
+      </Typography>
+      <Grid container sx={{ mb: 4, justifyContent: 'center' }}>
+        <Grid item>
+          {isLoading && <CircularProgress color="inherit" />}
+          {error && <p>Something went wrong...</p>}
+        </Grid>
+        {response && (
+          <Grid container columnSpacing={4} rowSpacing={{ xs: 1, sm: 4 }}>
+            {response.data.people.map((characterUrl: string) => (
+              <Grid item key={characterUrl} xs={12} sm={6}>
+                <CharacterButton charId={getIdFromUrl(characterUrl)} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Grid>
+    </Container>
   );
 };
 

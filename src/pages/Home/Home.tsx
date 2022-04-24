@@ -1,42 +1,81 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import useGetSwapi from '../../hooks/useAxios';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import useSwapiGet from '../../hooks/useSwapiGet';
 import getIdFromUrl from '../../utils/getIdFromUrl';
+import { SpeciesTypes } from '../../utils/types';
 
-type SpeciesTypes = {
-  name: string;
-  classification: string;
-  designation: string;
-  average_height: string;
-  skin_colors: string;
-  hair_colors: string;
-  eye_colors: string;
-  average_lifespan: string;
-  homeworld: string;
-  language: string;
-  people: string[];
-  films: string[];
-  created: string;
-  edited: string;
-  url: string;
-};
+import {
+  Container,
+  Pagination,
+  PaginationItem,
+  CircularProgress,
+  Grid,
+  Paper,
+  Typography,
+} from '@mui/material';
 
 const Home: React.FC = () => {
-  const [species, error, isLoading] = useGetSwapi('/species');
+  const { page = 1 } = useParams();
+  const { response, error, isLoading } = useSwapiGet(`/species/?page=${page}`);
+  const navigate = useNavigate();
+
+  const pageCount = Math.ceil(response?.data.count / 10);
 
   return (
-    <div>
-      {isLoading && <p>Loading</p>}
-      {error && <p>error</p>}
-      {species &&
-        species.data.results.map((species: SpeciesTypes) => (
-          <div key={species.url}>
-            <Link to={`/species/${getIdFromUrl(species.url)}`}>
-              {species.name}
-            </Link>
-          </div>
-        ))}
-    </div>
+    <Container maxWidth="md">
+      <Typography
+        fontSize={{
+          sm: 42,
+          xs: 30,
+        }}
+        component="h1"
+        sx={{ mb: 1 }}
+      >
+        Species:
+      </Typography>
+      <Grid container sx={{ mb: 4, justifyContent: 'center' }}>
+        <Grid item>
+          {isLoading && <CircularProgress color="inherit" />}
+          {error && <p>Something went wrong...</p>}
+          {response && (
+            <Pagination
+              count={pageCount}
+              page={Number(page)}
+              renderItem={(item) => (
+                <PaginationItem
+                  component={Link}
+                  to={`/${item.page}`}
+                  {...item}
+                />
+              )}
+            />
+          )}
+        </Grid>
+      </Grid>
+      {response && (
+        <Grid container columnSpacing={4} rowSpacing={{ xs: 1, sm: 4 }}>
+          {response.data.results.map((species: SpeciesTypes) => (
+            <Grid item key={species.url} xs={12} sm={6}>
+              <Paper
+                sx={{
+                  textAlign: 'center',
+                  height: { xs: 40, sm: 60 },
+                  lineHeight: { xs: '40px', sm: '60px' },
+                  cursor: 'pointer',
+                  fontSize: 18,
+                }}
+                elevation={6}
+                onClick={() =>
+                  navigate(`/species/${getIdFromUrl(species.url)}`)
+                }
+              >
+                {species.name}
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </Container>
   );
 };
 
