@@ -1,4 +1,4 @@
-import { Container, Typography, CircularProgress } from '@mui/material';
+import { Container, Typography, CircularProgress, Grid } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useSwapiGet from '../../hooks/useSwapiGet';
@@ -74,7 +74,13 @@ const Character: React.FC = () => {
         </>
       )}
 
-      {isLoading && <CircularProgress color="inherit" />}
+      {isLoading && (
+        <Grid container sx={{ justifyContent: 'center' }}>
+          <Grid item>
+            <CircularProgress color="inherit" />
+          </Grid>
+        </Grid>
+      )}
       {error && <p>Something went wrong...</p>}
     </Container>
   );
